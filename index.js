@@ -22,13 +22,14 @@ import { publicIp, publicIpv4, publicIpv6 } from 'public-ip';
 
 
 // For mongodb
-const  mongoUrl= 'mongodb://3.81.12.106:27017/'// Replace with mongodb server IP
+const mongoUrl = process.env.MONGO_URL || 'mongodb://mongo:27017/';
 const client = new MongoClient(mongoUrl); 
 
-const db = client.db('mydatabase'); // Name of your database
-const collection = db.collection('mycollection'); // Name of your collection
+const dbName = process.env.DB_NAME || 'mydatabase'; // Name of your database
+const collectionName = process.env.COLLECTION_NAME || 'mycollection'; // Name of your collection
 
-// Database connection function
+const db = client.db(dbName);
+const collection = db.collection(collectionName);// Database connection function
 async function connectToMongoDB() {
     try {
       await client.connect();
@@ -43,7 +44,7 @@ connectToMongoDB();
 // await client.close(); // Close the connection
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Home page
 app.get('/', (req, res) => {
