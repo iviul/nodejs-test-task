@@ -2,7 +2,11 @@ services:
   app:
     build: .
     ports:
+<<<<<<< HEAD
       - "5000:5000"
+=======
+      - "3000:3000"
+>>>>>>> d1f3676 (Update)
     environment:
       - MONGO_URL=mongodb://mongo:27017/
       - DB_NAME=mydatabase
