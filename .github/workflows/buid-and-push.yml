@@ -58,6 +58,11 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Debug meta
+          run: |
+            echo "TAGS: ${{ steps.meta.outputs.tags }}"
+            echo "JSON: ${{ steps.meta.outputs.json }}"
+
       - name: Scan image for vulnerabilities
         uses: aquasecurity/trivy-action@0.20.0
         with:
