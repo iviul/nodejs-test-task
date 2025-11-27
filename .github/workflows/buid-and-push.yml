@@ -67,4 +67,4 @@ jobs:
       - name: Scan image for vulnerabilities
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          iimage-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ steps.meta.outputs.tags }}
