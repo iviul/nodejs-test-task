@@ -68,5 +68,6 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ steps.first_tag.outputs.tag }}
-          format: table
+          severity: HIGH,CRITICAL
           exit-code: 1
+
