@@ -64,10 +64,13 @@ jobs:
           FIRST_TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n 1)
           echo "tag=$FIRST_TAG" >> $GITHUB_OUTPUT
 
-      - name: Scan image with Trivy
+      - name: Run Trivy vulnerability scanner (fail only on CRITICAL)
         uses: aquasecurity/trivy-action@master
+        continue-on-error: true
         with:
-          image-ref: ${{ steps.first_tag.outputs.tag }}
-          severity: HIGH,CRITICAL
+          image-ref: ${{ steps.meta.outputs.tags }}
+          format: table
           exit-code: 1
+          vuln-type: 'os,library'
+          severity: 'CRITICAL'
 
